@@ -103,3 +103,5 @@ bindkey '^I' autosuggest-accept
 alias ll="ls -altr"
 nitch
 alias cfg="cd ~/.config/"
+alias clear="clear && nitch"
+alias code="code --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland"
