@@ -1,6 +1,6 @@
-2024/03/10-07:46:07.486 4 Reusing MANIFEST /home/kngy/.config/chromium/Default/Session Storage/MANIFEST-000001
-2024/03/10-07:46:07.486 4 Recovering log #4
-2024/03/10-07:46:07.486 4 Reusing old log /home/kngy/.config/chromium/Default/Session Storage/000004.log 
-2024/03/10-07:46:43.988 4 Level-0 table #8: started
-2024/03/10-07:46:44.022 4 Level-0 table #8: 23548 bytes OK
-2024/03/10-07:46:44.028 4 Delete type=0 #4
+2024/03/25-12:25:17.603 4 Reusing MANIFEST /home/kngy/.config/chromium/Default/Session Storage/MANIFEST-000001
+2024/03/25-12:25:17.603 4 Recovering log #134
+2024/03/25-12:25:17.604 4 Reusing old log /home/kngy/.config/chromium/Default/Session Storage/000134.log 
+2024/03/25-12:25:44.725 4 Level-0 table #138: started
+2024/03/25-12:25:44.728 4 Level-0 table #138: 17994 bytes OK
+2024/03/25-12:25:44.730 4 Delete type=0 #134

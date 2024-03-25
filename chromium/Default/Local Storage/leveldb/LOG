@@ -1,17 +1,6 @@
-2024/03/10-07:48:22.614 4 Reusing MANIFEST /home/kngy/.config/chromium/Default/Local Storage/leveldb/MANIFEST-000001
-2024/03/10-07:48:22.617 4 Recovering log #54
-2024/03/10-07:48:22.617 4 Level-0 table #57: started
-2024/03/10-07:48:22.619 4 Level-0 table #57: 44788 bytes OK
-2024/03/10-07:48:22.620 4 Delete type=0 #54
-2024/03/10-07:48:22.620 6 Compacting 4@0 + 1@1 files
-2024/03/10-07:48:22.626 6 Generated table #59@0: 58 keys, 257068 bytes
-2024/03/10-07:48:22.627 6 Compacted 4@0 + 1@1 files => 257068 bytes
-2024/03/10-07:48:22.627 6 compacted to: files[ 0 1 1 0 0 0 0 ]
-2024/03/10-07:48:22.628 6 Delete type=2 #47
-2024/03/10-07:48:22.628 6 Delete type=2 #49
-2024/03/10-07:48:22.628 6 Delete type=2 #57
-2024/03/10-07:48:22.628 6 Delete type=2 #52
-2024/03/10-07:48:22.628 6 Delete type=2 #55
-2024/03/10-07:50:50.939 4 Level-0 table #61: started
-2024/03/10-07:50:50.957 4 Level-0 table #61: 58576 bytes OK
-2024/03/10-07:50:50.962 4 Delete type=0 #58
+2024/03/25-14:12:04.309 4 Reusing MANIFEST /home/kngy/.config/chromium/Default/Local Storage/leveldb/MANIFEST-000001
+2024/03/25-14:12:04.314 4 Recovering log #562
+2024/03/25-14:12:04.315 4 Reusing old log /home/kngy/.config/chromium/Default/Local Storage/leveldb/000562.log 
+2024/03/25-14:12:21.321 6 Level-0 table #566: started
+2024/03/25-14:12:21.328 6 Level-0 table #566: 252888 bytes OK
+2024/03/25-14:12:21.330 6 Delete type=0 #562
