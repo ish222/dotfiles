@@ -1,6 +1,0 @@
-2024/03/25-14:12:04.309 4 Reusing MANIFEST /home/kngy/.config/chromium/Default/Local Storage/leveldb/MANIFEST-000001
-2024/03/25-14:12:04.314 4 Recovering log #562
-2024/03/25-14:12:04.315 4 Reusing old log /home/kngy/.config/chromium/Default/Local Storage/leveldb/000562.log 
-2024/03/25-14:12:21.321 6 Level-0 table #566: started
-2024/03/25-14:12:21.328 6 Level-0 table #566: 252888 bytes OK
-2024/03/25-14:12:21.330 6 Delete type=0 #562

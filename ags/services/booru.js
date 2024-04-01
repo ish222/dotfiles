@@ -8,7 +8,7 @@ const APISERVICES = {
 }
 
 const getWorkingImageSauce = (url) => {
-    if(url.includes('pximg.net')) {
+    if (url.includes('pximg.net')) {
         return `https://www.pixiv.net/en/artworks/${url.substring(url.lastIndexOf('/')).replace(/_p\d+\.png$/, '')}`;
     }
     return url;
@@ -33,6 +33,7 @@ function paramStringFromObj(params) {
 class BooruService extends Service {
     _baseUrl = 'https://yande.re/post.json';
     _mode = 'yandere';
+    _nsfw = userOptions.sidebar.imageAllowNsfw;
     _responses = [];
     _queries = [];
 
@@ -56,6 +57,9 @@ class BooruService extends Service {
         this.emit('clear');
     }
 
+    get nsfw() { return this._nsfw }
+    set nsfw(value) { this._nsfw = value; }
+
     get mode() { return this._mode }
     set mode(value) {
         this._mode = value;
@@ -66,7 +70,7 @@ class BooruService extends Service {
 
     async fetch(msg) {
         // Init
-        const userArgs = msg.split(/\s+/);
+        const userArgs = `${msg}${this._nsfw ? '' : ' rating:safe'}`.split(/\s+/);
 
         let taglist = [];
         // Construct body/headers
@@ -82,7 +86,6 @@ class BooruService extends Service {
             'tags': taglist.join('+'),
         };
         const paramString = paramStringFromObj(params);
-        console.log('==========PARAMS LIST\n', params, '\n============\nSTR\n', paramString)
         // Fetch
         // Note: body isn't included since passing directly to url is more reliable
         const options = {
@@ -97,8 +100,11 @@ class BooruService extends Service {
             })
             .then((dataString) => { // Store interesting stuff and emit
                 const parsedData = JSON.parse(dataString);
+                // console.log(parsedData)
                 this._responses.push(parsedData.map(obj => {
                     return {
+                        id: obj.id,
+                        tags: obj.tags,
                         md5: obj.md5,
                         preview_url: obj.preview_url,
                         preview_width: obj.preview_width,
@@ -106,6 +112,10 @@ class BooruService extends Service {
                         sample_url: obj.sample_url,
                         sample_width: obj.sample_width,
                         sample_height: obj.sample_height,
+                        file_url: obj.file_url,
+                        file_ext: obj.file_ext,
+                        file_width: obj.file_width,
+                        file_height: obj.file_height,
                         source: getWorkingImageSauce(obj.source),
                     }
                 }));
