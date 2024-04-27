@@ -9,14 +9,14 @@ const { execAsync, exec } = Utils;
 import { BluetoothIndicator, NetworkIndicator } from '../.commonwidgets/statusicons.js';
 import { setupCursorHover } from '../.widgetutils/cursorhover.js';
 import { MaterialIcon } from '../.commonwidgets/materialicon.js';
+import { sidebarOptionsStack } from './sideright.js';
 
 export const ToggleIconWifi = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Wifi | Right-click to configure',
     onClicked: () => Network.toggleWifi(),
-    onSecondaryClickRelease: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi', '&']);
-        App.closeWindow('sideright');
+    onSecondaryClick: () => {
+        sidebarOptionsStack.focusName('Wifi networks')
     },
     child: NetworkIndicator(),
     setup: (self) => {
@@ -40,8 +40,8 @@ export const ToggleIconBluetooth = (props = {}) => Widget.Button({
             exec('rfkill unblock bluetooth');
     },
     onSecondaryClickRelease: () => {
-        execAsync(['bash', '-c', 'blueberry &']);
-        App.closeWindow('sideright');
+        execAsync(['bash', '-c', `${userOptions.apps.bluetooth}`]).catch(print);
+        closeEverything();
     },
     child: BluetoothIndicator(),
     setup: (self) => {
@@ -130,6 +130,36 @@ export const ModuleInvertColors = async (props = {}) => {
     };
 }
 
+export const ModuleRawInput = async (props = {}) => {
+    try {
+        const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
+        return Widget.Button({
+            className: 'txt-small sidebar-iconbutton',
+            tooltipText: 'Raw input',
+            onClicked: (button) => {
+                Hyprland.messageAsync('j/getoption input:accel_profile')
+                    .then((output) => {
+                        const value = JSON.parse(output)["str"].trim();
+                        if (value != "[[EMPTY]]" && value != "") {
+                            execAsync(['bash', '-c', `hyprctl keyword input:accel_profile '[[EMPTY]]'`]).catch(print);
+                            button.toggleClassName('sidebar-button-active', false);
+                        }
+                        else {
+                            Hyprland.messageAsync(`j/keyword input:accel_profile flat`)
+                                .catch(print);
+                            button.toggleClassName('sidebar-button-active', true);
+                        }
+                    })
+            },
+            child: MaterialIcon('mouse', 'norm'),
+            setup: setupCursorHover,
+            ...props,
+        })
+    } catch {
+        return null;
+    };
+}
+
 export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make this work
     attribute: {
         enabled: false,
@@ -156,7 +186,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({ // TODO: Make this
     className: 'txt-small sidebar-iconbutton',
     onClicked: () => {
         execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
-        App.toggleWindow('sideright');
+        App.closeWindow('sideright');
     },
     child: MaterialIcon('edit', 'norm'),
     setup: button => {
@@ -170,7 +200,7 @@ export const ModuleReloadIcon = (props = {}) => Widget.Button({
     tooltipText: 'Reload Environment config',
     onClicked: () => {
         execAsync(['bash', '-c', 'hyprctl reload || swaymsg reload &']);
-        App.toggleWindow('sideright');
+        App.closeWindow('sideright');
     },
     child: MaterialIcon('refresh', 'norm'),
     setup: button => {
@@ -183,8 +213,8 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Open Settings',
     onClicked: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
-        App.toggleWindow('sideright');
+        execAsync(['bash', '-c', `${userOptions.apps.settings}`, '&']);
+        App.closeWindow('sideright');
     },
     child: MaterialIcon('settings', 'norm'),
     setup: button => {
@@ -197,8 +227,8 @@ export const ModulePowerIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Session',
     onClicked: () => {
-        App.toggleWindow('session');
-        App.closeWindow('sideright');
+        closeEverything();
+        Utils.timeout(1, () => openWindowOnAllMonitors('session'));
     },
     child: MaterialIcon('power_settings_new', 'norm'),
     setup: button => {

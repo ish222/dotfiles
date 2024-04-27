@@ -7,14 +7,14 @@ const SysTrayItem = (item) => Button({
     className: 'bar-systray-item',
     child: Icon({
         hpack: 'center',
-        icon: item.icon,
+        icon: `${item.icon}`,
         setup: (self) => self.hook(item, (self) => self.icon = item.icon),
     }),
     setup: (self) => self
         .hook(item, (self) => self.tooltipMarkup = item['tooltip-markup'])
     ,
-    onClicked: btn => item.menu.popup_at_widget(btn, Gravity.SOUTH, Gravity.NORTH, null),
-    onSecondaryClick: btn => item.menu.popup_at_widget(btn, Gravity.SOUTH, Gravity.NORTH, null),
+    onPrimaryClick: (_, event) => item.activate(event),
+    onSecondaryClick: (btn, event) => item.menu.popup_at_widget(btn, Gravity.SOUTH, Gravity.NORTH, null),
 });
 
 export const Tray = (props = {}) => {

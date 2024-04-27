@@ -1,4 +1,8 @@
 {
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Shades of Purple (Super Dark)"
+    "workbench.colorTheme": "Monokai",
+    "clangd.arguments": [
+        "--compile-commands-dir=/home/kngy/dev/fixman/build/compile_commands.json -std=gnu++23"
+    ],
+    "clangd.checkUpdates": true
 }

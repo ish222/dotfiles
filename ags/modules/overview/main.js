@@ -1,13 +1,13 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { SearchAndWindows } from "./windowcontent.js";
+import PopupWindow from '../.widgethacks/popupwindow.js';
 
-export default () => Widget.Window({
-    name: 'overview',
-    exclusivity: 'ignore',
+export default (id = '') => PopupWindow({
+    name: `overview${id}`,
+    // exclusivity: 'ignore',
     keymode: 'exclusive',
-    popup: true,
     visible: false,
-    anchor: ['top'],
+    anchor: ['top', 'bottom'],
     layer: 'overlay',
     child: Widget.Box({
         vertical: true,
