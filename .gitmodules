@@ -1,9 +1,6 @@
 [submodule "alacritty/themes"]
 	path = alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme
-[submodule "nvim"]
-	path = nvim
-	url = https://github.com/NvChad/NvChad
 [submodule "simple-sddm"]
 	path = simple-sddm
 	url = https://github.com/JaKooLit/simple-sddm
